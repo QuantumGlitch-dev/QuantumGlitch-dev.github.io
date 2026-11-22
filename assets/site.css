@@ -1,0 +1,58 @@
+/* QuantumGlitch Studio site: palette from docs/style-bible.md (ink, cream, warm background, laser red) */
+@font-face {
+  font-family: "Fredoka";
+  src: url("fonts/Fredoka-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  --ink: #250F09;
+  --ink-soft: #5b3a30;
+  --bg: #FBF7EB;
+  --panel: #F9F1DA;
+  --line: #e8d9b8;
+  --laser: #FA534E;
+  --link: #b8322e;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f6ead2;
+    --ink-soft: #d8c4a4;
+    --bg: #1f1512;
+    --panel: #2b1e19;
+    --line: #4a362c;
+    --link: #ff8f86;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 64px; }
+
+header.site { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+header.site img { width: 180px; height: auto; display: block; }
+header.site .studio { font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; color: var(--ink-soft); }
+
+h1, h2 { font-family: "Fredoka", system-ui, sans-serif; font-weight: 600; line-height: 1.2; }
+h1 { font-size: 2rem; margin: 0 0 4px; }
+h2 { font-size: 1.3rem; margin: 32px 0 8px; }
+h2::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--laser); box-shadow: 0 0 8px var(--laser); margin-right: 10px; vertical-align: middle; }
+
+p, li { overflow-wrap: anywhere; }
+a { color: var(--link); }
+.muted { color: var(--ink-soft); }
+.card { background: var(--panel); border: 2px solid var(--line); border-radius: 16px; padding: 4px 20px; margin: 16px 0; }
+code { font-size: 0.92em; }
+
+footer.site { margin-top: 48px; padding-top: 16px; border-top: 2px solid var(--line); font-size: 0.9rem; color: var(--ink-soft); }
