@@ -269,30 +269,108 @@ function whileVisible(el, start, stop) {
 
 /* ---------- Grains of Salt: the book, the salt, the languages ---------- */
 (function book() {
-  const bk = $('#book');
+  const bk = $('#book'), card = $('#bk'), turnBtn = $('#bookTurn');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!calm) {
     bk.addEventListener('pointermove', e => {
       const r = bk.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-      bk.style.setProperty('--ry', (24 - x * 34).toFixed(1) + 'deg'); bk.style.setProperty('--rx', (3 - y * 12).toFixed(1) + 'deg');
+      bk.style.setProperty('--tx', (-x * 34).toFixed(1) + 'deg'); bk.style.setProperty('--ty', (-y * 12).toFixed(1) + 'deg');
     });
-    bk.addEventListener('pointerleave', () => { bk.style.removeProperty('--ry'); bk.style.removeProperty('--rx'); });
+    bk.addEventListener('pointerleave', () => { bk.style.removeProperty('--tx'); bk.style.removeProperty('--ty'); });
   }
-  /* the title changes language and the matching edition lights up; pointing at an edition picks its language */
-  const lw = $$('.lw'), eds = $$('.ed'); let li = 0, hold = false;
+
+  /* every edition has its own cover: front, spine and back are cut from its paperback wrap and fetched when first needed */
+  const face = { front: $('.book-front', bk), spine: $('.book-spine', bk), back: $('.book-back', bk) };
+  const pic = (f, l) => `assets/home/img/book/${f}-${l}.webp`;
+  const got = new Map();
+  const get = u => {
+    if (!got.has(u)) got.set(u, new Promise(ok => { const im = new Image(); im.onload = () => ok(true); im.onerror = () => { got.delete(u); ok(false); }; im.src = u; }));
+    return got.get(u);
+  };
+  /* cross-fade a face to another picture; the old one stays under the new one until it is covered */
+  const put = (el, u, now) => {
+    const old = $('img.on', el); let im = $('img:not(.on)', el);
+    if (old && old.getAttribute('src') === u) return;
+    if (!im) { im = new Image(); im.alt = ''; el.append(im); }
+    im.className = ''; im.src = u;
+    const show = () => {
+      el.classList.toggle('snap', !!now);
+      if (old) { old.style.zIndex = 1; old.className = 'under'; setTimeout(() => { if (old.className === 'under') old.className = ''; }, now ? 0 : 600); }
+      im.style.zIndex = 2; im.className = 'on';
+    };
+    (im.decode ? im.decode() : Promise.resolve()).then(show, show);
+  };
+  let cur = 'en', want = 'en', busy = 0, later = 0, flip = false, rtl = false, backOf = '';
+  const ready = l => Promise.all([get(pic('front', l)), get(pic('spine', l)), flip ? get(pic('back', l)) : true]).then(r => r.every(Boolean));
+  function sync() {
+    clearTimeout(later);
+    if (want === cur) return;
+    const wait = busy - performance.now();
+    if (wait > 0) { later = setTimeout(sync, wait + 20); return; }
+    const l = want;
+    ready(l).then(ok => {
+      if (!ok || l !== want || l === cur) return;
+      if (busy > performance.now()) return sync();
+      const swing = (l === 'ja') !== rtl;                    // the Japanese edition is bound on the right
+      cur = l; busy = performance.now() + (swing ? 760 : 620);
+      put(face.front, pic('front', l));
+      if (flip) { put(face.back, pic('back', l)); backOf = l; }
+      if (!swing) return put(face.spine, pic('spine', l));
+      const r = rtl = !rtl;
+      bk.classList.add('swing'); bk.classList.toggle('rtl', r);
+      /* spine and pages change sides at the moment the book faces the viewer and neither can be seen */
+      setTimeout(() => { bk.classList.toggle('rtl-faces', r); put(face.spine, pic('spine', l), true); }, still ? 0 : 350);
+      setTimeout(() => bk.classList.remove('swing'), 740);
+    });
+  }
+  const cover = l => { want = l; sync(); };
+  /* a click on the book or on the button turns it over */
+  function turnOver() {
+    const wait = busy - performance.now();
+    if (wait > 0) { setTimeout(turnOver, wait + 20); return; }
+    flip = !flip; busy = performance.now() + 2000;
+    const go = () => {
+      bk.classList.add('turning'); bk.classList.toggle('flip', flip); turnBtn.setAttribute('aria-pressed', flip);
+      busy = performance.now() + (still ? 0 : 960);
+      setTimeout(() => bk.classList.remove('turning'), 980);
+      sync();
+    };
+    if (!flip || backOf === cur) return go();
+    const l = cur;
+    Promise.race([get(pic('back', l)), new Promise(r => setTimeout(r, 900))]).then(() => { put(face.back, pic('back', l), true); backOf = l; go(); });
+  }
+  const warm = () => { get(pic('back', cur)); };
+  turnBtn.hidden = false;
+  turnBtn.addEventListener('click', turnOver); bk.addEventListener('click', turnOver);
+  bk.addEventListener('pointerenter', warm); turnBtn.addEventListener('pointerenter', warm); turnBtn.addEventListener('focus', warm);
+
+  /* the cover, its title in the copy and the lit edition change language together; pointing at an edition picks its language */
+  const lw = $$('.lw'), eds = $$('.ed'); let li = 0, hold = false, on = false, beat = 0;
   const say = (i, lit) => {
     lw[li].classList.remove('on'); li = i; lw[li].classList.add('on');
-    eds.forEach(a => a.classList.toggle('lit', lit && a.dataset.l === lw[li].dataset.l));
+    const l = lw[li].dataset.l;
+    eds.forEach(a => a.classList.toggle('lit', lit && a.dataset.l === l));
+    cover(l);
   };
   eds.forEach((a, n) => {
     a.style.setProperty('--i', n);
     const i = lw.findIndex(w => w.dataset.l === a.dataset.l);
-    const on = () => { hold = true; if (i >= 0) say(i, false); else eds.forEach(x => x.classList.remove('lit')); };
-    const off = () => { hold = false; };
-    a.addEventListener('pointerenter', on); a.addEventListener('focus', on);
-    a.addEventListener('pointerleave', off); a.addEventListener('blur', off);
+    const pick = () => { hold = true; if (i >= 0) say(i, false); };
+    const drop = () => { hold = false; };
+    a.addEventListener('pointerenter', pick); a.addEventListener('focus', pick);
+    a.addEventListener('pointerleave', drop); a.addEventListener('blur', drop);
   });
-  if (!calm) { say(0, true); setInterval(() => { if (!document.hidden && !hold) say((li + 1) % lw.length, true); }, 2300); }
-  const card = $('#bk'), cv = $('#salt'), ctx = cv.getContext('2d'), snow = css('--bk-snow');
+  const after = i => lw[(i + 1) % lw.length].dataset.l;
+  /* the next edition is fetched one step ahead, so the three change at the same moment */
+  const next = () => {
+    if (hold) return;
+    const from = li, i = (li + 1) % lw.length;
+    ready(lw[i].dataset.l).then(ok => { if (ok && on && !hold && li === from) { say(i, true); ready(after(i)); } });
+  };
+  const run = () => { on = true; say(li, !hold); ready(after(li)); beat = setInterval(next, 2300); };
+  const rest = () => { on = false; clearInterval(beat); };
+  if (!calm) { if ('IntersectionObserver' in window) whileVisible(card, run, rest); else run(); }
+  const cv = $('#salt'), ctx = cv.getContext('2d'), snow = css('--bk-snow');
   let W = 0, H = 0, P = [], raf = 0, last = 0;
   const grain = top => ({ x: rnd(0, W), y: top ? -6 : rnd(0, H), r: rnd(.5, 2.1), vy: rnd(9, 34), ph: rnd(0, 6.3), a: rnd(.22, .85) });
   function fit() {
