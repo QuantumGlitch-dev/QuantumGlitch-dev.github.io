@@ -3,41 +3,251 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>QuantumGlitch Studio</title>
-<meta name="description" content="QuantumGlitch Studio makes small, cozy games. Now: Herding Cats.">
+<title>QuantumGlitch Studio: games, apps and books</title>
+<meta name="description" content="QuantumGlitch Studio is a tiny independent studio making games, apps and books: the idle game Herding Cats, the RandomizeIt randomizers and the folk horror novel Grains of Salt.">
+<link rel="canonical" href="https://quantumglitch.eu/">
+<meta name="theme-color" content="#16163A" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F3F1EA" media="(prefers-color-scheme: light)">
 <link rel="icon" href="assets/img/studio/favicon.ico" sizes="32x32">
 <link rel="icon" href="assets/img/studio/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/studio/apple-touch-icon.png">
 <link rel="manifest" href="assets/img/studio/site.webmanifest">
 <meta property="og:type" content="website">
-<meta property="og:title" content="QuantumGlitch Studio">
-<meta property="og:description" content="QuantumGlitch Studio makes small, cozy games. Now: Herding Cats.">
-<meta property="og:url" content="https://quantumglitch-dev.github.io/">
-<meta property="og:image" content="https://quantumglitch-dev.github.io/assets/img/studio/og-image-1200x630.png">
+<meta property="og:site_name" content="QuantumGlitch Studio">
+<meta property="og:title" content="QuantumGlitch Studio: games, apps and books">
+<meta property="og:description" content="A tiny independent studio. Now: the idle game Herding Cats, the RandomizeIt randomizers and the folk horror novel Grains of Salt.">
+<meta property="og:url" content="https://quantumglitch.eu/">
+<meta property="og:image" content="https://quantumglitch.eu/assets/img/studio/og-image-1200x630.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="preload" href="assets/home/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/home/fonts/fredoka-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/home/home.css">
+<script>
+(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('qg-theme');if(t==='light'||t==='dark')d.dataset.theme=t}catch(e){}if(matchMedia('(prefers-reduced-motion: reduce)').matches||location.hash==='#still')d.classList.add('calm')})();
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"QuantumGlitch Studio","url":"https://quantumglitch.eu/","logo":"https://quantumglitch.eu/assets/img/studio/icon-512.png","email":"quantumglitchstudio@gmail.com","sameAs":["https://www.youtube.com/@QuantumGlitchStudio","https://x.com/QuantumGlitchSt","https://bsky.app/profile/quantumglitch.eu","https://www.tiktok.com/@quantumglitch_studio","https://www.instagram.com/quantumglitchstudio/","https://quantumglitchstudio.itch.io"]}</script>
 </head>
 <body>
-<div class="wrap">
-  <h1 class="studio-logo">
-    <picture>
-      <source srcset="assets/img/studio/quantumglitch-logo-wide-light.svg" media="(prefers-color-scheme: dark)">
-      <img src="assets/img/studio/quantumglitch-logo-wide.svg" alt="QuantumGlitch Studio" width="320" height="71">
-    </picture>
-  </h1>
-  <p class="muted">A tiny studio making small games.</p>
+<a class="skip" href="#main">Skip to content</a>
 
-  <div class="card">
-    <header class="site">
-      <img src="assets/img/herding-cats-logo-640.png" alt="Herding Cats" width="180" height="100">
-    </header>
-    <p>An idle game about the one thing nobody can do: herding cats. In development.</p>
-    <p><a href="herding-cats/privacy/">Privacy policy</a></p>
+<header class="top" id="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="QuantumGlitch Studio, back to top">
+      <svg viewBox="121.938 115.906 753.125 753.125" aria-hidden="true"><defs><clipPath id="sm-cut"><path d="M-500 -500H1500V470H-500Z M-500 500H1500V1500H-500Z"/></clipPath></defs><g clip-path="url(#sm-cut)"><path d="M200 500a300 300 0 1 0 600 0a300 300 0 1 0 -600 0ZM312.8 500a187.2 187.2 0 1 0 374.4 0a187.2 187.2 0 1 0 -374.4 0Z" fill-rule="evenodd"/><path d="M510.5 595.9L719.3 799L793.1 723L584.3 519.9Z"/></g><rect x="312.8" y="470" width="374.4" height="30"/><rect x="770" y="440" width="84" height="30"/><rect x="143" y="500" width="87" height="30"/></svg>
+    </a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#games">Games</a>
+      <a href="#apps">Apps</a>
+      <a href="#books">Books</a>
+      <a href="#studio">Studio</a>
+    </nav>
+    <button class="icon-btn theme-btn" id="theme" type="button" aria-label="Switch between the navy and the paper look">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17a8.5 8.5 0 0 0 0-17z" fill="currentColor" stroke="none"/></svg>
+    </button>
+    <button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <svg class="wordmark" viewBox="0 0 1828 292" role="img" aria-label="QuantumGlitch Studio"><g class="wm-cy" transform="translate(-3.2 0)"><path transform="translate(1065.5 181.1) scale(0.09766 -0.09766)" d="M772 -24C1158 -24 1432 232 1432 602V792H806V558H1131C1128 373 985 248 780 248C526 248 373 438 373 744C373 1051 525 1242 776 1242C954 1242 1077 1143 1110 991H1422C1384 1303 1109 1514 767 1514C365 1514 63 1220 63 744C63 284 350 -24 772 -24Z"/><path transform="translate(1215.1 181.1) scale(0.09766 -0.09766)" d="M111 0H1096V264H419V1490H111Z"/><path transform="translate(1328.8 181.1) scale(0.09766 -0.09766)" d="M419 1490H111V0H419Z"/><path transform="translate(1383.0 181.1) scale(0.09766 -0.09766)" d="M45 1226H497V0H805V1226H1256V1490H45Z"/><path transform="translate(1512.4 181.1) scale(0.09766 -0.09766)" d="M771 -24C1120 -24 1380 191 1427 523H1117C1079 348 951 248 775 248C521 248 373 441 373 744C373 1049 522 1242 775 1242C952 1242 1081 1141 1116 965H1427C1380 1298 1120 1514 771 1514C361 1514 63 1220 63 744C63 271 362 -24 771 -24Z"/><path transform="translate(1660.0 181.1) scale(0.09766 -0.09766)" d="M111 0H419V628H1052V0H1359V1490H1052V892H419V1490H111Z"/></g><g class="wm-mg" transform="translate(3.2 0)"><path transform="translate(1065.5 181.1) scale(0.09766 -0.09766)" d="M772 -24C1158 -24 1432 232 1432 602V792H806V558H1131C1128 373 985 248 780 248C526 248 373 438 373 744C373 1051 525 1242 776 1242C954 1242 1077 1143 1110 991H1422C1384 1303 1109 1514 767 1514C365 1514 63 1220 63 744C63 284 350 -24 772 -24Z"/><path transform="translate(1215.1 181.1) scale(0.09766 -0.09766)" d="M111 0H1096V264H419V1490H111Z"/><path transform="translate(1328.8 181.1) scale(0.09766 -0.09766)" d="M419 1490H111V0H419Z"/><path transform="translate(1383.0 181.1) scale(0.09766 -0.09766)" d="M45 1226H497V0H805V1226H1256V1490H45Z"/><path transform="translate(1512.4 181.1) scale(0.09766 -0.09766)" d="M771 -24C1120 -24 1380 191 1427 523H1117C1079 348 951 248 775 248C521 248 373 441 373 744C373 1049 522 1242 775 1242C952 1242 1081 1141 1116 965H1427C1380 1298 1120 1514 771 1514C361 1514 63 1220 63 744C63 271 362 -24 771 -24Z"/><path transform="translate(1660.0 181.1) scale(0.09766 -0.09766)" d="M111 0H419V628H1052V0H1359V1490H1052V892H419V1490H111Z"/></g><g class="wm-main" transform="translate(0.0 0)"><path transform="translate(24.0 181.1) scale(0.09766 -0.09766)" d="M765 -24C858 -24 946 -8 1026 22L1141 -124H1421L1214 133C1371 265 1468 476 1468 744C1468 1219 1166 1514 765 1514C364 1514 63 1219 63 744C63 272 364 -24 765 -24ZM646 512 842 255C817 250 792 248 765 248C535 248 373 428 373 744C373 1062 535 1242 765 1242C995 1242 1158 1062 1158 744C1158 572 1110 440 1029 355L906 512Z"/><path transform="translate(175.9 181.1) scale(0.09766 -0.09766)" d="M721 -24C1093 -24 1335 197 1335 519V1490H1034V544C1034 368 911 242 721 242C532 242 409 369 409 544V1490H108V519C108 196 349 -24 721 -24Z"/><path transform="translate(319.1 181.1) scale(0.09766 -0.09766)" d="M9 0H341L449 325H1006L1110 0H1451L928 1490H532ZM532 571 583 725C631 877 677 1029 731 1214C784 1029 830 877 876 725L926 571Z"/><path transform="translate(464.2 181.1) scale(0.09766 -0.09766)" d="M111 0H419V691C419 755 418 882 412 1038C496 887 572 758 615 690L1049 0H1374V1490H1067V753C1067 690 1068 567 1072 452C1013 559 949 672 914 728L435 1490H111Z"/><path transform="translate(611.6 181.1) scale(0.09766 -0.09766)" d="M45 1226H497V0H805V1226H1256V1490H45Z"/><path transform="translate(741.1 181.1) scale(0.09766 -0.09766)" d="M721 -24C1093 -24 1335 197 1335 519V1490H1034V544C1034 368 911 242 721 242C532 242 409 369 409 544V1490H108V519C108 196 349 -24 721 -24Z"/><path transform="translate(884.3 181.1) scale(0.09766 -0.09766)" d="M111 0H413V708C413 807 408 974 404 1132C455 965 505 800 536 708L791 0H1041L1293 708C1325 803 1377 979 1428 1153C1424 989 1418 812 1418 708V0H1719V1490H1270L1027 796C1000 708 953 551 917 423C881 551 834 708 806 796L560 1490H111Z"/><path transform="translate(1065.5 181.1) scale(0.09766 -0.09766)" d="M772 -24C1158 -24 1432 232 1432 602V792H806V558H1131C1128 373 985 248 780 248C526 248 373 438 373 744C373 1051 525 1242 776 1242C954 1242 1077 1143 1110 991H1422C1384 1303 1109 1514 767 1514C365 1514 63 1220 63 744C63 284 350 -24 772 -24Z"/><path transform="translate(1215.1 181.1) scale(0.09766 -0.09766)" d="M111 0H1096V264H419V1490H111Z"/><path transform="translate(1328.8 181.1) scale(0.09766 -0.09766)" d="M419 1490H111V0H419Z"/><path transform="translate(1383.0 181.1) scale(0.09766 -0.09766)" d="M45 1226H497V0H805V1226H1256V1490H45Z"/><path transform="translate(1512.4 181.1) scale(0.09766 -0.09766)" d="M771 -24C1120 -24 1380 191 1427 523H1117C1079 348 951 248 775 248C521 248 373 441 373 744C373 1049 522 1242 775 1242C952 1242 1081 1141 1116 965H1427C1380 1298 1120 1514 771 1514C361 1514 63 1220 63 744C63 271 362 -24 771 -24Z"/><path transform="translate(1660.0 181.1) scale(0.09766 -0.09766)" d="M111 0H419V628H1052V0H1359V1490H1052V892H419V1490H111Z"/></g><g class="wm-sub"><path transform="translate(729.9 268.5) scale(0.02930 -0.02930)" d="M652 -24C990 -24 1209 152 1209 420C1209 633 1071 762 772 833L611 871C406 920 326 982 326 1090C326 1225 453 1320 633 1320C821 1320 943 1215 954 1044H1169C1160 1335 957 1514 636 1514C316 1514 105 1341 105 1079C105 873 237 748 538 677L701 638C908 589 987 523 987 408C987 263 854 170 652 170C429 170 298 286 297 483H75C75 168 295 -24 652 -24Z"/><path transform="translate(797.5 268.5) scale(0.02930 -0.02930)" d="M48 1295H523V0H746V1295H1219V1490H48Z"/><path transform="translate(864.6 268.5) scale(0.02930 -0.02930)" d="M720 -24C1078 -24 1312 199 1312 510V1490H1091V528C1091 324 950 177 720 177C491 177 350 324 350 528V1490H129V510C129 199 362 -24 720 -24Z"/><path transform="translate(936.8 268.5) scale(0.02930 -0.02930)" d="M618 0C1073 0 1339 284 1339 747C1339 1208 1072 1490 633 1490H136V0ZM358 193V1297H619C951 1297 1116 1092 1116 747C1116 400 951 193 604 193Z"/><path transform="translate(1008.4 268.5) scale(0.02930 -0.02930)" d="M358 1490H136V0H358Z"/><path transform="translate(1052.9 268.5) scale(0.02930 -0.02930)" d="M766 -24C1163 -24 1452 288 1452 744C1452 1202 1163 1514 766 1514C369 1514 81 1202 81 744C81 289 369 -24 766 -24ZM766 179C509 179 304 381 304 744C304 1109 509 1311 766 1311C1023 1311 1229 1109 1229 744C1229 381 1023 179 766 179Z"/></g></svg>
+      <h1 class="hero-title">
+        <span class="sr">We make games, apps and books.</span>
+        <span class="ht-pre" aria-hidden="true">We make</span>
+        <span class="swap" aria-hidden="true"><span class="sw sw-games on">games</span><span class="sw sw-apps">apps</span><span class="sw sw-books">books</span></span>
+        <span class="ht-all" aria-hidden="true">games, apps and books.</span>
+      </h1>
+      <p class="lead">QuantumGlitch Studio is a tiny independent studio. Right now that means a cozy idle game about herding cats, a set of fair randomizers and a folk horror novel in nine languages.</p>
+      <div class="cta">
+        <a class="btn btn-solid" href="#games">See what we make <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        <a class="btn btn-line" href="#studio">Say hello</a>
+      </div>
+    </div>
+    <div class="hero-mark" id="heroMark">
+      <svg class="qmark" id="qmark" viewBox="123.5 191 750 618" role="img" aria-label="The QuantumGlitch Studio mark: a letter Q cut by a glitch slice">
+        <defs>
+          <clipPath id="q-up"><rect x="-600" y="-600" width="2200" height="1085"/></clipPath>
+          <clipPath id="q-dn"><rect x="-600" y="500" width="2200" height="1100"/></clipPath>
+          <clipPath id="q-tr"><rect x="500" y="-600" width="1100" height="1085"/></clipPath>
+          <clipPath id="q-bl"><rect x="-600" y="500" width="1100" height="1100"/></clipPath>
+          <g id="q-shape"><path d="M200 500a300 300 0 1 0 600 0a300 300 0 1 0 -600 0ZM312.8 500a187.2 187.2 0 1 0 374.4 0a187.2 187.2 0 1 0 -374.4 0Z" fill-rule="evenodd"/><path d="M510.48 595.86L719.28 798.96L793.12 723.04L584.32 519.94Z"/></g>
+        </defs>
+        <g class="q-top">
+          <g clip-path="url(#q-tr)"><use href="#q-shape" class="q-mg" x="7.5"/><use href="#q-shape" class="q-cy" x="-7.5"/></g>
+          <g clip-path="url(#q-up)"><use href="#q-shape" class="q-fill"/></g>
+          <rect class="q-fill" x="770" y="470" width="84" height="15"/><rect class="q-mg" x="854" y="470" width="10.5" height="15"/>
+        </g>
+        <g class="q-bot">
+          <g clip-path="url(#q-bl)"><use href="#q-shape" class="q-mg" x="7.5"/><use href="#q-shape" class="q-cy" x="-7.5"/></g>
+          <g clip-path="url(#q-dn)"><use href="#q-shape" class="q-fill"/></g>
+          <rect class="q-fill" x="143" y="500" width="87" height="15"/><rect class="q-cy" x="132.5" y="500" width="10.5" height="15"/>
+        </g>
+        <g class="q-bar"><rect class="q-fill" x="312.8" y="485" width="374.4" height="15"/><rect class="q-cy" x="302.3" y="485" width="10.5" height="15"/><rect class="q-mg" x="687.2" y="485" width="10.5" height="15"/></g>
+      </svg>
+    </div>
   </div>
 
-  <footer class="site">© 2026 QuantumGlitch Studio</footer>
-</div>
+  <div class="wrap">
+    <nav class="now" aria-label="What is shipping now">
+      <div class="now-grid">
+        <a href="#games"><span class="k">Game</span><span class="n">Herding Cats</span><span class="s"><i class="dot dev"></i>In development for Google Play, App Store and Steam</span></a>
+        <a href="#apps"><span class="k">App</span><span class="n">RandomizeIt</span><span class="s"><i class="dot"></i>Live on the web, Android app in closed testing</span></a>
+        <a href="#books"><span class="k">Novel</span><span class="n">Grains of Salt</span><span class="s"><i class="dot"></i>Out now in 9 languages</span></a>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="world" id="games">
+  <div class="wrap">
+    <div class="world-head">
+      <h2 class="slice rv" data-t="Games">Games</h2>
+      <p>One game in the works, and it is full of cats.</p>
+    </div>
+    <article class="win hc rv">
+      <div class="hc-scene" id="hcScene">
+        <img class="hc-room" loading="lazy" decoding="async" src="assets/home/img/hc-room.webp" width="2560" height="827" alt="A cozy cartoon apartment seen from above: a kitchen corner, a bed, a rug, a cat tree and cats asleep everywhere.">
+        <canvas class="hc-canvas" id="hcCanvas" aria-hidden="true"></canvas>
+        <img class="hc-logo" loading="lazy" decoding="async" src="assets/home/img/hc-logo.webp" width="640" height="357" alt="Herding Cats">
+        <span class="chip chip-hint" id="hcHint">Move the laser. They can't help it.</span>
+        <span class="chip chip-count" aria-hidden="true">Pounces <b id="hcCount">0</b></span>
+      </div>
+      <div class="hc-info">
+        <div>
+          <p class="hc-k">Herding Cats</p>
+          <h3>An idle game about the one thing nobody can do.</h3>
+          <p class="t">Pet cats, wave a laser pointer and herd millions of them, from a tiny apartment to the whole universe.</p>
+        </div>
+        <div class="hc-side">
+          <ul class="plats" aria-label="Platforms"><li>Coming to</li><li>Google Play</li><li>App Store</li><li>Steam</li></ul>
+          <div class="hc-links">
+            <a class="btn-hc" href="https://www.youtube.com/@QuantumGlitchStudio" target="_blank" rel="noopener">Follow on YouTube <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a class="plain" href="herding-cats/privacy/">Privacy policy</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="world" id="apps">
+  <div class="wrap">
+    <div class="world-head">
+      <h2 class="slice rv" data-t="Apps">Apps</h2>
+      <p>Small tools that do one thing and play fair.</p>
+    </div>
+    <article class="win rz rv">
+      <div class="rz-text">
+        <div class="rz-id">
+          <svg class="rz-icon" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="rz-sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b2163"/><stop offset="1" stop-color="#110e26"/></linearGradient></defs><rect width="48" height="48" rx="11" fill="url(#rz-sky)"/><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" transform="translate(9 9) scale(1.25)" fill="none" stroke="#ffcb8e" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>RandomizeIt</h3>
+        </div>
+        <p class="rz-tag">Spin a wheel, flip a coin, roll dice, pick a name or draw tarot cards.</p>
+        <p class="t">Free random generators and decision tools in one place. Every result is drawn first and shown second, with the cryptographic random generator of your device, so each option gets exactly the same chance.</p>
+        <ul class="rz-pills">
+          <li>19 tools</li>
+          <li>7 languages</li>
+          <li><i class="dot"></i>Live on the web</li>
+          <li><i class="dot dev"></i>Android app in closed testing</li>
+        </ul>
+        <a class="btn btn-rz" href="https://randomizeit.xyz" target="_blank" rel="noopener">Open randomizeit.xyz <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </div>
+      <div class="rz-play">
+        <div class="wheel-box" id="wheelBox">
+          <svg class="wheel" viewBox="-124 -124 248 248" role="img" aria-label="A wheel with six options">
+            <g class="wheel-rot" id="wheelRot"></g>
+            <path class="w-ptr" d="M120 0c0 5-4 9-9 9-6 0-14-9-14-9s8-9 14-9c5 0 9 4 9 9z" style="transform-origin:111px 0"/>
+          </svg>
+          <button class="wheel-btn" id="wheelBtn" type="button">SPIN</button>
+        </div>
+        <p class="rz-res" aria-live="polite"><span class="k" id="wheelK">What now?</span><span class="v" id="wheelV">Spin it</span></p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="world" id="books">
+  <div class="wrap">
+    <div class="world-head">
+      <h2 class="slice rv" data-t="Books">Books</h2>
+      <p>We publish as Vale Books, and we built the studio that makes the editions.</p>
+    </div>
+    <article class="win bk rv" id="bk">
+      <canvas class="salt" id="salt" aria-hidden="true"></canvas>
+      <div class="book" id="book">
+        <div class="book-3d">
+          <span class="book-back" aria-hidden="true"></span>
+          <span class="book-pages" aria-hidden="true"></span>
+          <span class="book-spine" aria-hidden="true">Grains of Salt · George Vale</span>
+          <img class="book-front" loading="lazy" decoding="async" src="assets/home/img/grains-of-salt.webp" width="815" height="1221" alt="Cover of Grains of Salt by George Vale: a child in a red hat, holding a teddy bear, stands in the snow before a boarded-up door in a cliff with cold light behind the planks.">
+        </div>
+        <span class="book-shadow" aria-hidden="true"></span>
+      </div>
+      <div class="bk-copy">
+        <p class="bk-k">Vale Books · folk horror novel</p>
+        <h3>Grains of Salt</h3>
+        <p class="bk-by">George Vale</p>
+        <p class="bk-q">The town is perfect. The children are happy. And the mountain is hungry.</p>
+        <p class="t">Dan and Emma came to Norway for one last trip before starting a family. Solværd was only meant to be a detour: a postcard village famous for its hand-harvested salt and a festival it has kept for eight hundred years. The festival is in two days, and visitors are asked to leave before it begins.</p>
+        <ul class="bk-meta"><li>316 pages</li><li>Paperback and Kindle</li><li>9 languages</li></ul>
+        <p class="langs"><span aria-hidden="true">Also reads as</span><span class="lang-swap" aria-hidden="true"><span class="lw on">Salzkörner</span><span class="lw">Grains de sel</span><span class="lw">Granelli di sale</span><span class="lw">Granos de sal</span></span><span class="sr">Also published in German as Salzkörner, in French as Grains de sel, in Italian as Granelli di sale and in Spanish as Granos de sal.</span></p>
+        <a class="btn btn-line btn-bk" href="https://www.amazon.com/dp/8398384697" target="_blank" rel="noopener">Find it on Amazon <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+      </div>
+    </article>
+    <article class="pen rise rv">
+      <div>
+        <p class="k">Publishing studio</p>
+        <h3>PenStranding</h3>
+        <p class="t">The publishing studio for indie authors and small presses: ebooks, paperbacks, hardcovers, covers and translations, every edition store-ready. Grains of Salt was made here.</p>
+      </div>
+      <a class="btn btn-line" href="https://penstranding.com" target="_blank" rel="noopener">penstranding.com <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </article>
+  </div>
+</section>
+
+<section class="about" id="studio">
+  <div class="wrap">
+    <h2 class="slice rv" data-t="Studio">Studio</h2>
+    <div class="about-grid">
+      <div class="rise rv">
+        <p class="big">A tiny studio that makes what it would want itself, then polishes it until it feels right.</p>
+        <p class="t">We build games, apps and books, one careful release at a time. Questions, press and ideas all land in the same inbox, and a person answers.</p>
+      </div>
+      <div class="rise rv">
+        <ul class="links">
+          <li><a href="https://www.youtube.com/@QuantumGlitchStudio" target="_blank" rel="noopener"><span class="k">YouTube</span><span class="v">@QuantumGlitchStudio <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+          <li><a href="https://x.com/QuantumGlitchSt" target="_blank" rel="noopener"><span class="k">X</span><span class="v">@QuantumGlitchSt <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+          <li><a href="https://bsky.app/profile/quantumglitch.eu" target="_blank" rel="noopener"><span class="k">Bluesky</span><span class="v">@quantumglitch.eu <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+          <li><a href="https://www.tiktok.com/@quantumglitch_studio" target="_blank" rel="noopener"><span class="k">TikTok</span><span class="v">@quantumglitch_studio <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+          <li><a href="https://www.instagram.com/quantumglitchstudio/" target="_blank" rel="noopener"><span class="k">Instagram</span><span class="v">@quantumglitchstudio <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+          <li><a href="https://discord.gg/QPVEnNxFpX" target="_blank" rel="noopener"><span class="k">Discord</span><span class="v">Join the server <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+          <li><a href="https://quantumglitchstudio.itch.io" target="_blank" rel="noopener"><span class="k">itch.io</span><span class="v">quantumglitchstudio.itch.io <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span></a></li>
+          <li><div class="row"><span class="k">Email</span><span class="v"><span id="mail">quantumglitchstudio@gmail.com</span> <button class="copy" id="copyMail" type="button">Copy</button></span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-mark">
+      <img class="for-dark" loading="lazy" decoding="async" src="assets/home/img/wordmark5-light.svg" width="1445" height="303" alt="QuantumGlitch Studio">
+      <img class="for-light" loading="lazy" decoding="async" src="assets/home/img/wordmark5-dark.svg" width="1445" height="303" alt="QuantumGlitch Studio">
+    </div>
+    <p class="foot-row"><span>© 2026 QuantumGlitch Studio</span><a href="herding-cats/privacy/">Herding Cats privacy policy</a></p>
+  </div>
+</footer>
+
+<script src="assets/home/home.js" defer></script>
 </body>
 </html>

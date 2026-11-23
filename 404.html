@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found · QuantumGlitch Studio</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/img/studio/favicon.ico" sizes="32x32">
+<link rel="icon" href="/assets/img/studio/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/studio/apple-touch-icon.png">
+<style>
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/home/fonts/inter-latin-var.woff2) format("woff2")}
+:root{--ground:#16163A;--ink:#FBF3E0;--ink-2:#C9C9D8;--hair:rgba(251,243,224,.17);--cy:#2CD3EA;--mg:#F23FAE;--btn:#FBF3E0;--btn-ink:#16163A;color-scheme:dark}
+@media (prefers-color-scheme: light){:root{--ground:#F3F1EA;--ink:#16163A;--ink-2:#686880;--hair:rgba(22,22,58,.16);--btn:#16163A;--btn-ink:#FBF3E0;color-scheme:light}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100vh;min-height:100svh;display:grid;place-items:center;background:var(--ground);color:var(--ink);font:400 1.0625rem/1.6 "Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip}
+main{position:relative;display:grid;justify-items:start;gap:1.1rem;width:min(100% - 40px,560px);padding-block:3rem}
+main::before{content:"";position:absolute;left:-100vw;right:-100vw;top:calc(3rem + 22px);height:2px;background:var(--hair);z-index:-1}
+.mark{display:block;width:44px;height:44px;background:var(--ground);box-shadow:0 0 0 14px var(--ground)}
+.mark svg{display:block;width:100%;height:100%;fill:var(--ink)}
+h1{position:relative;margin:1.2rem 0 0;font-size:clamp(5rem,24vw,10rem);font-weight:800;line-height:1;letter-spacing:-.04em;color:transparent}
+h1::before,h1::after{content:attr(data-t);position:absolute;left:0;top:0;color:var(--ink)}
+h1::before{clip-path:inset(-20% -20% 57% -20%)}
+h1::after{clip-path:inset(47% -20% -20% -20%);transform:translateX(.075em);text-shadow:-.028em 0 0 var(--cy),.028em 0 0 var(--mg)}
+p{margin:0;font-size:1.2rem;color:var(--ink-2)}
+a.btn{display:inline-flex;align-items:center;min-height:48px;margin-top:.6rem;padding:.7rem 1.3rem;border-radius:999px;background:var(--btn);color:var(--btn-ink);font-weight:600;text-decoration:none}
+a:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+  <a class="mark" href="/" aria-label="QuantumGlitch Studio, home">
+    <svg viewBox="121.938 115.906 753.125 753.125" aria-hidden="true"><defs><clipPath id="sm-cut"><path d="M-500 -500H1500V470H-500Z M-500 500H1500V1500H-500Z"/></clipPath></defs><g clip-path="url(#sm-cut)"><path d="M200 500a300 300 0 1 0 600 0a300 300 0 1 0 -600 0ZM312.8 500a187.2 187.2 0 1 0 374.4 0a187.2 187.2 0 1 0 -374.4 0Z" fill-rule="evenodd"/><path d="M510.5 595.9L719.3 799L793.1 723L584.3 519.9Z"/></g><rect x="312.8" y="470" width="374.4" height="30"/><rect x="770" y="440" width="84" height="30"/><rect x="143" y="500" width="87" height="30"/></svg>
+  </a>
+  <h1 data-t="404">404</h1>
+  <p>This page glitched out of existence.</p>
+  <a class="btn" href="/">Back to the studio</a>
+</main>
+</body>
+</html>
