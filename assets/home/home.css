@@ -250,17 +250,52 @@ p{margin:0}
 /* Vale Books */
 .bk{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:center;gap:2.5rem clamp(1.5rem,4vw,4rem);padding:clamp(2.25rem,5vw,4.25rem) clamp(1.25rem,4vw,3.75rem);color:var(--bk-snow);background:radial-gradient(120% 95% at 20% 42%,var(--bk-deep),var(--bk-night) 72%)}
 .salt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.book{--rx:3deg;--ry:24deg;position:relative;justify-self:center;width:min(76%,310px);perspective:1500px}
+.book-col{position:relative;display:grid;justify-items:center;gap:3.1rem;min-width:0}
+.book{--pose:24deg;--tx:0deg;--ty:0deg;position:relative;width:min(76%,310px);perspective:1500px;container-type:inline-size}
+.js .book{cursor:pointer}
 .book::before{content:"";position:absolute;inset:-16% -34%;background:radial-gradient(closest-side,var(--bk-glow),transparent);animation:flick 5.5s steps(11) infinite}
 @keyframes flick{0%,100%{opacity:.9}27%{opacity:.62}31%{opacity:.95}58%{opacity:.7}63%{opacity:1}82%{opacity:.78}}
-.book-3d{position:relative;aspect-ratio:815/1221;transform-style:preserve-3d;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .5s var(--ease);animation:bob 6.5s ease-in-out infinite}
+/* a closed box: front, back and spine are cut from the paperback wrap of each edition; --th is the thickness */
+.book-3d{--th:32px;position:relative;aspect-ratio:2/3;transform-style:preserve-3d;transform:rotateX(calc(3deg + var(--ty))) rotateY(calc(var(--pose) + var(--tx)));transition:transform .5s var(--ease);animation:bob 6.5s ease-in-out infinite}
+@supports (width:1cqw){.book-3d{--th:13.5cqw}}
 @keyframes bob{50%{translate:0 -9px}}
-.book-front,.book-back,.book-spine,.book-pages{position:absolute;top:0;height:100%}
-.book-front{left:0;width:100%;max-width:none;object-fit:cover;transform:translateZ(16px);border-radius:2px 5px 5px 2px}
-.book-back{left:0;width:100%;background:var(--bk-night);transform:translateZ(-16px)}
-.book-spine{left:0;width:32px;display:grid;place-items:center;transform:translateX(-16px) rotateY(-90deg);background:linear-gradient(to right,var(--bk-night),var(--bk-deep) 55%,var(--bk-night));color:var(--bk-snow-2);font:600 .58rem var(--f-book);letter-spacing:.3em;text-transform:uppercase;writing-mode:vertical-rl;white-space:nowrap;overflow:hidden}
-.book-pages{right:0;width:30px;transform:translateX(15px) rotateY(90deg);background:repeating-linear-gradient(to right,var(--bk-snow) 0 1px,var(--bk-snow-2) 1px 3px)}
-.book-shadow{position:absolute;left:4%;right:-10%;bottom:-11%;height:10%;background:radial-gradient(closest-side,var(--bk-shadow),transparent);filter:blur(7px)}
+.book.rtl{--pose:-24deg}
+.book.flip{--pose:156deg}
+.book.flip.rtl{--pose:204deg}
+.book.swing .book-3d{transition:transform .7s cubic-bezier(.45,0,.55,1)}
+.book.turning .book-3d{transition:transform .95s cubic-bezier(.45,0,.25,1)}
+.book-face{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;background:var(--bk-night)}
+.book-face img{position:absolute;top:0;left:0;width:100%;height:100%;max-width:none;object-fit:cover;opacity:0;transition:opacity .55s}
+.book-face img.on,.book-face img.under{opacity:1}
+.book-face img.under,.book-face.snap img{transition:none}
+.book-face::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none}
+.book-front,.book-back{-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.book-front{transform:translateZ(calc(var(--th)/2));border-radius:2px 5px 5px 2px}
+.book-front::after{background:linear-gradient(to right,rgba(0,0,0,.3),transparent 3.5%)}
+.book-back{transform:rotateY(180deg) translateZ(calc(var(--th)/2));border-radius:5px 2px 2px 5px}
+.book-back::after{background:linear-gradient(to left,rgba(0,0,0,.3),transparent 3.5%)}
+.book-spine,.book-pages{width:var(--th)}
+.book-spine{transform:translateX(calc(var(--th)/-2)) rotateY(-90deg)}
+.book-spine::after{background:linear-gradient(to right,rgba(0,0,0,.34),transparent 28%,transparent 72%,rgba(0,0,0,.26))}
+.book-pages{left:auto;right:0;transform:translateX(calc(var(--th)/2)) rotateY(90deg);background:repeating-linear-gradient(to right,var(--bk-snow) 0 1px,var(--bk-snow-2) 1px 3px)}
+.book-top,.book-bottom{height:var(--th);background:repeating-linear-gradient(to bottom,var(--bk-snow) 0 1px,var(--bk-snow-2) 1px 3px)}
+.book-top{transform:translateY(calc(var(--th)/-2)) rotateX(90deg)}
+.book-bottom{top:auto;bottom:0;transform:translateY(calc(var(--th)/2)) rotateX(-90deg)}
+/* the Japanese edition is bound on the right: spine and pages change sides while the book swings past the viewer */
+.book.rtl-faces .book-spine{left:auto;right:0;transform:translateX(calc(var(--th)/2)) rotateY(90deg)}
+.book.rtl-faces .book-pages{right:auto;left:0;transform:translateX(calc(var(--th)/-2)) rotateY(-90deg)}
+.book.rtl-faces .book-front{border-radius:5px 2px 2px 5px}
+.book.rtl-faces .book-front::after{background:linear-gradient(to left,rgba(0,0,0,.3),transparent 3.5%)}
+.book.rtl-faces .book-back{border-radius:2px 5px 5px 2px}
+.book.rtl-faces .book-back::after{background:linear-gradient(to right,rgba(0,0,0,.3),transparent 3.5%)}
+.book-shadow{position:absolute;left:4%;right:-10%;bottom:-11%;height:10%;background:radial-gradient(closest-side,var(--bk-shadow),transparent);filter:blur(7px);transition:left .7s,right .7s}
+.book.rtl .book-shadow{left:-10%;right:4%}
+.book-turn{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:.45rem 1.05rem;border:1px solid var(--bk-hair);border-radius:999px;background:var(--bk-pane);color:var(--bk-snow-2);font:600 .82rem/1.2 var(--f-studio);letter-spacing:.03em;cursor:pointer;transition:border-color .3s,color .3s,background-color .3s}
+.book-turn[hidden]{display:none}
+.book-turn .ico{width:16px;height:16px;transition:transform .7s var(--ease)}
+.book-turn:hover,.book-turn[aria-pressed="true"]{border-color:var(--bk-ice);color:var(--bk-snow)}
+.book-turn:hover{background:var(--bk-frost)}
+.book-turn[aria-pressed="true"] .ico{transform:rotate(180deg)}
 .bk-copy{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:.95rem;min-width:0}
 .bk-k{font-size:var(--t-small);font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--bk-ice)}
 .bk h3{margin:0;font-family:var(--f-book);font-size:clamp(2.5rem,5.6vw,4.5rem);font-weight:500;line-height:.98;letter-spacing:.06em;text-transform:uppercase}
