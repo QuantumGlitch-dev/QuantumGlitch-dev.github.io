@@ -276,9 +276,22 @@ function whileVisible(el, start, stop) {
       bk.style.setProperty('--ry', (24 - x * 34).toFixed(1) + 'deg'); bk.style.setProperty('--rx', (3 - y * 12).toFixed(1) + 'deg');
     });
     bk.addEventListener('pointerleave', () => { bk.style.removeProperty('--ry'); bk.style.removeProperty('--rx'); });
-    const lw = $$('.lw'); let li = 0;
-    setInterval(() => { if (document.hidden) return; lw[li].classList.remove('on'); li = (li + 1) % lw.length; lw[li].classList.add('on'); }, 2300);
   }
+  /* the title changes language and the matching edition lights up; pointing at an edition picks its language */
+  const lw = $$('.lw'), eds = $$('.ed'); let li = 0, hold = false;
+  const say = (i, lit) => {
+    lw[li].classList.remove('on'); li = i; lw[li].classList.add('on');
+    eds.forEach(a => a.classList.toggle('lit', lit && a.dataset.l === lw[li].dataset.l));
+  };
+  eds.forEach((a, n) => {
+    a.style.setProperty('--i', n);
+    const i = lw.findIndex(w => w.dataset.l === a.dataset.l);
+    const on = () => { hold = true; if (i >= 0) say(i, false); else eds.forEach(x => x.classList.remove('lit')); };
+    const off = () => { hold = false; };
+    a.addEventListener('pointerenter', on); a.addEventListener('focus', on);
+    a.addEventListener('pointerleave', off); a.addEventListener('blur', off);
+  });
+  if (!calm) { say(0, true); setInterval(() => { if (!document.hidden && !hold) say((li + 1) % lw.length, true); }, 2300); }
   const card = $('#bk'), cv = $('#salt'), ctx = cv.getContext('2d'), snow = css('--bk-snow');
   let W = 0, H = 0, P = [], raf = 0, last = 0;
   const grain = top => ({ x: rnd(0, W), y: top ? -6 : rnd(0, H), r: rnd(.5, 2.1), vy: rnd(9, 34), ph: rnd(0, 6.3), a: rnd(.22, .85) });

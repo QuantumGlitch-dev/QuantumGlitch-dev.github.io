@@ -15,3 +15,5 @@ The site is plain HTML, CSS and JavaScript with no build step and no third-party
 - `assets/site.css`, `assets/fonts/` — styles and font of the privacy page.
 
 Fonts (latin subsets, variable): Inter, Fredoka, Playfair Display and Cormorant Garamond, all under the SIL Open Font License 1.1 (`assets/home/fonts/OFL-*.txt`, `assets/fonts/OFL.txt`).
+
+The book block lists the nine language editions of Grains of Salt. Two of them need letters the latin subsets lack, so `assets/home/fonts/` also has five tiny subsets that hold only those letters: `cormorant-uk`, `cormorant-italic-uk` and `inter-uk` for the Ukrainian title and language name (Зерна солі, Українська), `noto-serif-jp-title` and `noto-sans-jp-label` (Noto Serif JP, Noto Sans JP) for the Japanese ones (塩の粒, 日本語). If those words change, get new subsets from Google Fonts with the `text=` parameter of the CSS API.

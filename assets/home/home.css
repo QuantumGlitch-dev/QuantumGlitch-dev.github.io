@@ -5,6 +5,12 @@
 @font-face{font-family:"Playfair Display";font-style:normal;font-weight:600 700;font-display:swap;src:url(fonts/playfair-latin-var.woff2) format("woff2")}
 @font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500 600;font-display:swap;src:url(fonts/cormorant-latin-var.woff2) format("woff2")}
 @font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;font-display:swap;src:url(fonts/cormorant-italic-latin-var.woff2) format("woff2")}
+/* tiny subsets that hold only the letters of two edition titles and language names: Зерна солі, Українська, 塩の粒, 日本語 */
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500 600;font-display:swap;src:url(fonts/cormorant-uk.woff2) format("woff2");unicode-range:U+0400-04FF}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;font-display:swap;src:url(fonts/cormorant-italic-uk.woff2) format("woff2");unicode-range:U+0400-04FF}
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 800;font-display:swap;src:url(fonts/inter-uk.woff2) format("woff2");unicode-range:U+0400-04FF}
+@font-face{font-family:"Noto Serif JP";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/noto-serif-jp-title.woff2) format("woff2");unicode-range:U+3040-309F,U+4E00-9FFF}
+@font-face{font-family:"Noto Sans JP";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/noto-sans-jp-label.woff2) format("woff2");unicode-range:U+4E00-9FFF}
 
 /* Layout: a navy studio frame crossed by one hairline, the slice of the studio mark.
    Each product is a "world" window in its own art style, opened along that line. */
@@ -28,11 +34,12 @@
   /* Vale Books world */
   --bk-night:#060A15; --bk-deep:#101B36; --bk-ice:#8FC8FF; --bk-snow:#EEF4FB; --bk-snow-2:#B4C2D8;
   --bk-glow:rgba(111,183,255,.34); --bk-shadow:rgba(0,0,0,.6);
+  --bk-hair:rgba(143,200,255,.24); --bk-frost:rgba(143,200,255,.09); --bk-pane:rgba(6,10,21,.46);
   /* type */
-  --f-studio:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --f-studio:"Inter","Noto Sans JP",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --f-game:"Fredoka","Baloo 2","Nunito",ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif;
   --f-app:"Playfair Display","Iowan Old Style","Palatino Linotype",Georgia,serif;
-  --f-book:"Cormorant Garamond","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --f-book:"Cormorant Garamond","Noto Serif JP","Iowan Old Style","Palatino Linotype",Georgia,serif;
   --t-hero:clamp(4.4rem,12.5vw,10.5rem); --t-h2:clamp(2.2rem,4.8vw,3.75rem); --t-h3:clamp(1.45rem,2.5vw,2.05rem);
   --t-lead:clamp(1.06rem,1.35vw,1.22rem); --t-small:.8rem;
   --wrap:1180px; --r:26px; --ease:cubic-bezier(.2,.8,.2,1);
@@ -268,6 +275,26 @@ p{margin:0}
 .lw.on{opacity:1;transform:none}
 .btn-bk{border-color:var(--bk-ice);color:var(--bk-snow);margin-top:.3rem}
 .btn-bk:hover{background:var(--bk-ice);color:var(--bk-night)}
+.lw:lang(ja){font-style:normal;font-size:.86em}
+.bk-eds{grid-column:1/-1;position:relative;min-width:0;padding-top:clamp(1.4rem,3vw,2rem);border-top:1px solid var(--bk-hair)}
+.bk-eds-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.3rem 1.5rem;margin-bottom:1rem}
+.bk-eds-h h4{margin:0;font-family:var(--f-studio)}
+.bk-eds-h p{font-size:.92rem;color:var(--bk-snow-2)}
+.eds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem;margin:0;padding:0;list-style:none}
+.ed{display:grid;grid-template-columns:minmax(0,1fr) auto;align-content:start;gap:.15rem .75rem;height:100%;padding:.85rem 1rem .95rem;border:1px solid var(--bk-hair);border-radius:14px;background:var(--bk-pane);color:var(--bk-snow);text-decoration:none;transition:border-color .3s,background-color .3s,box-shadow .6s}
+.ed-l{grid-area:1/1;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--bk-ice)}
+.ed .ico{grid-area:1/2;align-self:center;width:16px;height:16px;color:var(--bk-snow-2);transition:transform .3s var(--ease),color .3s}
+.ed-t{grid-column:1/-1;font-family:var(--f-book);font-size:1.5rem;font-weight:500;line-height:1.2;transition:color .3s}
+.ed-t:lang(ja){font-size:1.26rem;line-height:1.43;letter-spacing:.06em}
+.ed-f{grid-column:1/-1;display:flex;flex-wrap:wrap;margin-top:.15rem;font-size:.82rem;color:var(--bk-snow-2)}
+.ed-f span+span::before{content:"·";margin-inline:.45em;color:var(--bk-ice)}
+.ed:hover,.ed.lit{border-color:var(--bk-ice)}
+.ed.lit{box-shadow:0 0 30px -6px var(--bk-glow)}
+.ed:hover{background:var(--bk-frost)}
+.ed:hover .ed-t,.ed.lit .ed-t{color:var(--bk-ice)}
+.ed:hover .ico{transform:translate(2px,-2px);color:var(--bk-ice)}
+.js:not(.calm) .bk-eds.rv .ed{opacity:0;transform:translateY(12px);transition:opacity .6s calc(var(--i,0)*55ms),transform .6s var(--ease) calc(var(--i,0)*55ms),border-color .3s,background-color .3s,box-shadow .6s}
+.js:not(.calm) .bk-eds.rv.in .ed{opacity:1;transform:none}
 .pen{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:1rem 2rem;margin-top:1rem;padding:1.3rem clamp(1.1rem,2.6vw,2rem);border:1px solid var(--hair);border-radius:var(--r);background:var(--ground-2)}
 .pen .k{font-size:var(--t-small);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
 .pen h3{margin:.15rem 0 .35rem;font-size:1.5rem;font-weight:800;letter-spacing:-.02em;line-height:1.15}
@@ -316,6 +343,14 @@ p{margin:0}
   .rz-id{order:-2}
   .rz-play{order:-1;margin-bottom:1.75rem}
   .rz .btn-rz{justify-self:start}
+  .eds{grid-template-columns:minmax(0,1fr)}
+  .ed{grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:.05rem .8rem;padding:.7rem .95rem .75rem}
+  .ed-l{grid-area:1/1}
+  .ed-t{grid-area:2/1;font-size:1.4rem}
+  .ed-t:lang(ja){font-size:1.18rem}
+  .ed-f{grid-area:1/2/3/3;display:grid;justify-items:end;margin:0;line-height:1.35}
+  .ed-f span+span::before{content:none}
+  .ed .ico{grid-area:1/3/3/4}
 }
 @media (max-width:640px){
   .now-grid{grid-template-columns:minmax(0,1fr)}
@@ -325,6 +360,10 @@ p{margin:0}
 @media (max-width:560px){
   .hc-scene{--posx:57%;aspect-ratio:1/1.04}
   .chip-count{bottom:auto;top:.6rem}
+}
+@media (max-width:420px){
+  .ed-t{font-size:1.3rem}
+  .ed-f span+span{display:none}
 }
 @media (max-width:380px){
   .rz{padding:1.25rem}
